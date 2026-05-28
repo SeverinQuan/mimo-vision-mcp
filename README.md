@@ -182,6 +182,20 @@ Analyze an image and return a text-based visual description.
 
 ---
 
+## 🔗 Related Official Resources
+
+This project is **an independent community MCP bridge** for the Xiaomi MiMo ecosystem.
+
+Official Xiaomi MiMo resources:
+
+- [XiaomiMiMo GitHub Organization](https://github.com/XiaomiMiMo)
+- [XiaomiMiMo/MiMo](https://github.com/XiaomiMiMo/MiMo)
+- [XiaomiMiMo/MiMo-VL](https://github.com/XiaomiMiMo/MiMo-VL)
+- [XiaomiMiMo/MiMo-Skills](https://github.com/XiaomiMiMo/MiMo-Skills)
+- [XiaomiMiMo/MiMo-V2-Flash](https://github.com/XiaomiMiMo/MiMo-V2-Flash)
+
+---
+
 ## 📦 Project Structure
 
 ```
@@ -418,6 +432,20 @@ cp .env.example .env
 | 图表理解 | 解读图表、表格截图 |
 | 文档分析 | 分析扫描件、图片版文档 |
 | Agent 视觉扩展 | 给纯文本 Agent 接入看图能力 |
+
+---
+
+## 🔗 相关官方资源
+
+本项目是面向 Xiaomi MiMo 生态的**独立社区 MCP 桥接项目**。
+
+Xiaomi MiMo 官方资源：
+
+- [XiaomiMiMo GitHub 组织](https://github.com/XiaomiMiMo)
+- [XiaomiMiMo/MiMo](https://github.com/XiaomiMiMo/MiMo)
+- [XiaomiMiMo/MiMo-VL](https://github.com/XiaomiMiMo/MiMo-VL)
+- [XiaomiMiMo/MiMo-Skills](https://github.com/XiaomiMiMo/MiMo-Skills)
+- [XiaomiMiMo/MiMo-V2-Flash](https://github.com/XiaomiMiMo/MiMo-V2-Flash)
 
 ---
 
