@@ -89,6 +89,49 @@ Text-only LLM + MiMo Vision MCP = Visual Agent
 
 ---
 
+## 🧩 Runtime Requirements
+
+### Client compatibility
+
+| Package | Use when | Runtime needed |
+|---------|----------|----------------|
+| `.mcpb` | Your client supports MCP Bundle / MCPB packages | Client-provided Python or `uv` runtime |
+| `.dxt` | Your client only supports legacy Desktop Extension / DXT packages | Python 3.8.0 or newer |
+| Source install | Your client uses manual `mcpServers` JSON configuration | Python 3.8.0 or newer |
+
+Supported MCP clients include Claude Desktop, Cline, Cursor, OpenClaw, OpenCode,
+and other clients that can start a stdio MCP server with `command`, `args`, and
+`env`.
+
+### Python runtime
+
+- Minimum Python version: `3.8.0`
+- Recommended Python version: `3.10+` when available
+- Python packages:
+
+```txt
+httpx>=0.27,<0.29
+anyio>=4.0,<4.6
+```
+
+The server implements MCP stdio directly and does **not** require the Python
+`mcp` package. This keeps the legacy DXT package usable on Python 3.8.
+
+### Build tools
+
+Only needed if you build packages yourself:
+
+| Tool | Required for | Install command |
+|------|--------------|-----------------|
+| `@anthropic-ai/mcpb` | Build `.mcpb` package | `npm install -g @anthropic-ai/mcpb` |
+| `@anthropic-ai/dxt` | Build legacy `.dxt` package | `npm install -g @anthropic-ai/dxt` |
+
+The prebuilt release packages already include the needed manifest and bundled
+DXT dependencies, so normal users only need to install the package and fill in
+the MiMo API key.
+
+---
+
 ## 🚀 Manual MCP Install
 
 Use this path when your MCP client still expects a manual `mcpServers` JSON
@@ -438,6 +481,47 @@ Created by [SeverinQuan](https://github.com/SeverinQuan)
 - 🌏 国内直连，不经过代理
 - ⚡ 轻量级 — 单文件 Python 实现
 - 🧠 主模型负责推理，MiMo 负责看图
+
+---
+
+## 🧩 依赖环境
+
+### 客户端兼容性
+
+| 安装包 | 适用场景 | 所需运行环境 |
+|--------|----------|--------------|
+| `.mcpb` | 客户端支持 MCP Bundle / MCPB 包 | 客户端提供的 Python 或 `uv` 运行时 |
+| `.dxt` | 客户端只支持旧版 Desktop Extension / DXT 包 | Python 3.8.0 或以上 |
+| 源码安装 | 客户端使用手写 `mcpServers` JSON 配置 | Python 3.8.0 或以上 |
+
+支持的 MCP 客户端包括 Claude Desktop、Cline、Cursor、OpenClaw、OpenCode，
+以及其他能够通过 `command`、`args`、`env` 启动 stdio MCP server 的客户端。
+
+### Python 运行时
+
+- 最低 Python 版本：`3.8.0`
+- 推荐 Python 版本：有条件时使用 `3.10+`
+- Python 依赖包：
+
+```txt
+httpx>=0.27,<0.29
+anyio>=4.0,<4.6
+```
+
+服务端直接实现 MCP stdio 协议，不依赖 Python `mcp` 包，因此旧版 DXT 包可以在
+Python 3.8 环境中使用。
+
+### 构建工具
+
+只有你需要自己构建安装包时才需要安装：
+
+| 工具 | 用途 | 安装命令 |
+|------|------|----------|
+| `@anthropic-ai/mcpb` | 构建 `.mcpb` 包 | `npm install -g @anthropic-ai/mcpb` |
+| `@anthropic-ai/dxt` | 构建旧版 `.dxt` 包 | `npm install -g @anthropic-ai/dxt` |
+
+预构建 Release 包已经包含所需 manifest；DXT 包也已经打入依赖。普通用户只需要
+安装对应包，然后填写 MiMo API Key。
 
 ---
 
