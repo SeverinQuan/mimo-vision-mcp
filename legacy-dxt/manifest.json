@@ -23,8 +23,8 @@
       "env": {
         "PYTHONPATH": "${__dirname}/server/lib",
         "MIMO_API_KEY": "${user_config.mimo_api_key}",
-        "MIMO_BASE_URL": "${user_config.mimo_base_url}",
-        "MIMO_MODEL": "${user_config.mimo_model}",
+        "MIMO_BASE_URL": "https://api.xiaomimimo.com/v1",
+        "MIMO_MODEL": "mimo-v2.5",
         "NO_PROXY": "*"
       }
     }
@@ -61,20 +61,6 @@
       "description": "Your Xiaomi MiMo API key. It is injected at runtime as MIMO_API_KEY.",
       "sensitive": true,
       "required": true
-    },
-    "mimo_base_url": {
-      "type": "string",
-      "title": "MiMo Base URL",
-      "description": "MiMo OpenAI-compatible API base URL.",
-      "default": "https://api.xiaomimimo.com/v1",
-      "required": false
-    },
-    "mimo_model": {
-      "type": "string",
-      "title": "MiMo Model",
-      "description": "MiMo vision model identifier.",
-      "default": "mimo-v2.5",
-      "required": false
     }
   }
 }

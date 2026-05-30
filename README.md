@@ -161,7 +161,8 @@ This repository can publish both installable bundle formats:
 
 The MiMo API key is **not** stored in code or in the bundle. It is declared in
 `manifest.json` as a sensitive `user_config` field and injected at runtime as
-`MIMO_API_KEY`.
+`MIMO_API_KEY`. The bundle hardcodes the official MiMo API base URL and default
+model to avoid client-side `user_config` interpolation issues.
 
 ### Option A: Install a prebuilt package
 
@@ -173,8 +174,6 @@ The MiMo API key is **not** stored in code or in the bundle. It is declared in
 
 ```text
 MiMo API Key: your_mimo_api_key_here
-MiMo Base URL: https://api.xiaomimimo.com/v1
-MiMo Model: mimo-v2.5
 ```
 
 6. Enable the extension and restart the client if required.
@@ -227,8 +226,8 @@ your target client or release process requires signed bundles.
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `MIMO_API_KEY` | *(required)* | Your MiMo platform API key |
-| `MIMO_BASE_URL` | `https://api.xiaomimimo.com/v1` | API base URL |
-| `MIMO_MODEL` | `mimo-v2.5` | Model ID |
+| `MIMO_BASE_URL` | `https://api.xiaomimimo.com/v1` | Hardcoded in bundle manifests; optional manual override |
+| `MIMO_MODEL` | `mimo-v2.5` | Hardcoded in bundle manifests; optional manual override |
 
 ---
 
@@ -504,7 +503,8 @@ cp .env.example .env
 
 MiMo API Key **不会**写入代码或打包产物。它在 `manifest.json` 中声明为
 敏感的 `user_config` 配置项，安装时由客户端收集，并在运行时注入为
-`MIMO_API_KEY` 环境变量。
+`MIMO_API_KEY` 环境变量。安装包会固定写入官方 MiMo API 地址和默认模型，
+避免客户端未正确展开 `user_config` 时导致启动失败。
 
 ### 方式 A：安装预构建包
 
@@ -516,8 +516,6 @@ MiMo API Key **不会**写入代码或打包产物。它在 `manifest.json` 中�
 
 ```text
 MiMo API Key: your_mimo_api_key_here
-MiMo Base URL: https://api.xiaomimimo.com/v1
-MiMo Model: mimo-v2.5
 ```
 
 6. 启用扩展；如客户端要求，重启一次。
@@ -570,8 +568,8 @@ bash scripts/build_bundles.sh
 | 变量 | 默认值 | 说明 |
 |----------|---------|-------------|
 | `MIMO_API_KEY` | *(必填)* | MiMo 开放平台 API Key |
-| `MIMO_BASE_URL` | `https://api.xiaomimimo.com/v1` | API 地址 |
-| `MIMO_MODEL` | `mimo-v2.5` | 模型标识 |
+| `MIMO_BASE_URL` | `https://api.xiaomimimo.com/v1` | 安装包 manifest 中已固定；手动配置时可覆盖 |
+| `MIMO_MODEL` | `mimo-v2.5` | 安装包 manifest 中已固定；手动配置时可覆盖 |
 
 ---
 

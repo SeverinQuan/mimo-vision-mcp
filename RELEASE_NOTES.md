@@ -7,6 +7,7 @@ This release publishes both current MCPB and legacy DXT installable packages.
 - Adds MCPB bundle support through `manifest.json` and `pyproject.toml`.
 - Adds legacy DXT bundle support through `legacy-dxt/manifest.json`.
 - Keeps `MIMO_API_KEY` out of source code and package contents by using sensitive `user_config`.
+- Hardcodes the official MiMo base URL and default model in both bundle manifests to avoid client-side interpolation failures.
 - Includes both installable artifacts:
   - `mimo-vision-mcp-1.0.0.mcpb`
   - `mimo-vision-mcp-1.0.0.dxt`
@@ -23,8 +24,6 @@ During installation, fill in:
 
 ```text
 MiMo API Key: your_mimo_api_key_here
-MiMo Base URL: https://api.xiaomimimo.com/v1
-MiMo Model: mimo-v2.5
 ```
 
 ## Notes
