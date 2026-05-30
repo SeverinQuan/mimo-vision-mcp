@@ -1,0 +1,33 @@
+name: Publish Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Create GitHub Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout tagged source
+        uses: actions/checkout@v4
+
+      - name: Verify release assets
+        run: |
+          test -f dist/mimo-vision-mcp-1.0.0.mcpb
+          test -f dist/mimo-vision-mcp-1.0.0.dxt
+
+      - name: Create release and upload assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${GITHUB_REF_NAME}" \
+            --title "MiMo Vision MCP ${GITHUB_REF_NAME}" \
+            --notes-file RELEASE_NOTES.md \
+            dist/mimo-vision-mcp-1.0.0.mcpb \
+            dist/mimo-vision-mcp-1.0.0.dxt
