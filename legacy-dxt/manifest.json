@@ -1,0 +1,80 @@
+{
+  "dxt_version": "0.1",
+  "name": "mimo-vision",
+  "display_name": "MiMo Vision MCP",
+  "version": "1.0.0",
+  "description": "Analyze local or remote images through Xiaomi MiMo Vision from DXT-compatible MCP clients.",
+  "long_description": "MiMo Vision MCP gives text-only agents a lightweight image analysis tool. This legacy DXT manifest uses the older Desktop Extensions schema and a traditional Python server bundle for clients that do not support MCPB/uv yet.",
+  "author": {
+    "name": "SeverinQuan"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SeverinQuan/mimo-vision-mcp"
+  },
+  "server": {
+    "type": "python",
+    "entry_point": "server/main.py",
+    "mcp_config": {
+      "command": "python",
+      "args": [
+        "${__dirname}/server/main.py"
+      ],
+      "env": {
+        "PYTHONPATH": "${__dirname}/server/lib",
+        "MIMO_API_KEY": "${user_config.mimo_api_key}",
+        "MIMO_BASE_URL": "${user_config.mimo_base_url}",
+        "MIMO_MODEL": "${user_config.mimo_model}",
+        "NO_PROXY": "*"
+      }
+    }
+  },
+  "tools": [
+    {
+      "name": "mimo_image_analyze",
+      "description": "Analyze an image using Xiaomi MiMo Vision. Supports local image file paths and http(s) URLs."
+    }
+  ],
+  "keywords": [
+    "mcp",
+    "dxt",
+    "vision",
+    "image-analysis",
+    "mimo",
+    "xiaomi"
+  ],
+  "license": "MIT",
+  "compatibility": {
+    "platforms": [
+      "darwin",
+      "win32",
+      "linux"
+    ],
+    "runtimes": {
+      "python": ">=3.10"
+    }
+  },
+  "user_config": {
+    "mimo_api_key": {
+      "type": "string",
+      "title": "MiMo API Key",
+      "description": "Your Xiaomi MiMo API key. It is injected at runtime as MIMO_API_KEY.",
+      "sensitive": true,
+      "required": true
+    },
+    "mimo_base_url": {
+      "type": "string",
+      "title": "MiMo Base URL",
+      "description": "MiMo OpenAI-compatible API base URL.",
+      "default": "https://api.xiaomimimo.com/v1",
+      "required": false
+    },
+    "mimo_model": {
+      "type": "string",
+      "title": "MiMo Model",
+      "description": "MiMo vision model identifier.",
+      "default": "mimo-v2.5",
+      "required": false
+    }
+  }
+}

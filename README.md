@@ -156,6 +156,17 @@ Bundles. Older DXT-only clients may require the legacy `@anthropic-ai/dxt`
 toolchain, but the packaging model is the same: a zip archive with
 `manifest.json` and the MCP server files.
 
+To publish both formats from the same repository, run:
+
+```bash
+bash scripts/build_bundles.sh
+```
+
+It writes both artifacts to `dist/`:
+
+- `mimo-vision-mcp-1.0.0.mcpb` for the current MCPB toolchain
+- `mimo-vision-mcp-1.0.0.dxt` for legacy DXT clients
+
 ---
 
 ## ⚙️ Environment Variables
@@ -435,6 +446,17 @@ mcpb pack
 这会生成可安装的 `.mcpb` 包，用于支持 MCP Bundles 的桌面客户端。旧版
 DXT-only 客户端可能需要使用旧的 `@anthropic-ai/dxt` 工具链，但核心格式
 仍然是包含 `manifest.json` 和 MCP server 文件的压缩包。
+
+如需从同一仓库同时发布两种格式，运行：
+
+```bash
+bash scripts/build_bundles.sh
+```
+
+脚本会将两个产物写入 `dist/`：
+
+- `mimo-vision-mcp-1.0.0.mcpb`：当前 MCPB 工具链
+- `mimo-vision-mcp-1.0.0.dxt`：旧 DXT 客户端兼容包
 
 ---
 

@@ -5,3 +5,6 @@ __pycache__/
 *.dxt
 *.mcpb
 dist/
+legacy-dxt/
+legacy-dxt/server/lib/
+legacy-dxt/server/__pycache__/
