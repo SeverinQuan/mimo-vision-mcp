@@ -103,6 +103,10 @@ cd mimo-vision-mcp
 
 ### 2. Install Python dependencies
 
+Python 3.8.0 or newer is supported. The server uses a lightweight native MCP
+stdio implementation and keeps dependencies limited to Python 3.8-compatible
+HTTP packages.
+
 ```bash
 pip install -r requirements.txt
 ```
@@ -204,7 +208,8 @@ dxt pack legacy-dxt dist/mimo-vision-mcp-1.0.0.dxt
 ```
 
 The DXT package bundles Python dependencies under `legacy-dxt/server/lib`, so it
-is larger than the MCPB package.
+is larger than the MCPB package. The legacy DXT runtime supports Python 3.8.0
+or newer.
 
 ### Option D: Build both formats
 
@@ -449,6 +454,9 @@ cd mimo-vision-mcp
 
 ### 2. 安装 Python 依赖
 
+支持 Python 3.8.0 及以上版本。服务端使用轻量级原生 MCP stdio 实现，
+依赖限定为兼容 Python 3.8 的 HTTP 包。
+
 ```bash
 pip install -r requirements.txt
 ```
@@ -549,7 +557,7 @@ dxt pack legacy-dxt dist/mimo-vision-mcp-1.0.0.dxt
 ```
 
 DXT 包会把 Python 依赖放进 `legacy-dxt/server/lib`，因此体积会比 MCPB
-包更大。
+包更大。旧版 DXT 运行时支持 Python 3.8.0 及以上版本。
 
 ### 方式 D：同时构建两种格式
 

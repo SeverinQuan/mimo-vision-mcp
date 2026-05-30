@@ -16,4 +16,6 @@ bash scripts/build_bundles.sh
 
 The build script installs Python dependencies into `legacy-dxt/server/lib`
 before packing so the final `.dxt` is self-contained for the legacy Python
-bundle model.
+bundle model. The legacy runtime supports Python 3.8.0 or newer and only
+bundles Python 3.8-compatible HTTP dependencies; the server implements MCP
+stdio directly.

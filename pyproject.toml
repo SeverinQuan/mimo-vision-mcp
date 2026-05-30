@@ -2,11 +2,10 @@
 name = "mimo-vision-mcp"
 version = "1.0.0"
 description = "MCP bundle that exposes Xiaomi MiMo Vision image analysis as a stdio MCP tool."
-requires-python = ">=3.10"
+requires-python = ">=3.8"
 dependencies = [
-  "openai>=1.0",
-  "mcp>=1.0",
-  "httpx>=0.27",
+  "httpx>=0.27,<0.29",
+  "anyio>=4.0,<4.6",
 ]
 
 [project.license]

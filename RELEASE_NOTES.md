@@ -8,6 +8,7 @@ This release publishes both current MCPB and legacy DXT installable packages.
 - Adds legacy DXT bundle support through `legacy-dxt/manifest.json`.
 - Keeps `MIMO_API_KEY` out of source code and package contents by using sensitive `user_config`.
 - Hardcodes the official MiMo base URL and default model in both bundle manifests to avoid client-side interpolation failures.
+- Lowers the Python runtime requirement to Python 3.8.0 by replacing Python `mcp` / `openai` package usage with a native MCP stdio implementation and direct `httpx` API calls.
 - Includes both installable artifacts:
   - `mimo-vision-mcp-1.0.0.mcpb`
   - `mimo-vision-mcp-1.0.0.dxt`
