@@ -1,0 +1,81 @@
+{
+  "manifest_version": "0.4",
+  "name": "mimo-vision",
+  "display_name": "MiMo Vision MCP",
+  "version": "1.0.0",
+  "description": "Analyze local or remote images through Xiaomi MiMo Vision from any MCP client that supports bundles.",
+  "long_description": "MiMo Vision MCP gives text-only agents a lightweight image analysis tool. The extension reads local image paths or remote image URLs, sends the image to Xiaomi MiMo Vision, and returns a text description for downstream reasoning.",
+  "author": {
+    "name": "SeverinQuan"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SeverinQuan/mimo-vision-mcp"
+  },
+  "license": "MIT",
+  "keywords": [
+    "mcp",
+    "vision",
+    "image-analysis",
+    "mimo",
+    "xiaomi"
+  ],
+  "privacy_policies": [
+    "https://privacy.mi.com/all/en_US/"
+  ],
+  "server": {
+    "type": "uv",
+    "entry_point": "src/server.py",
+    "mcp_config": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--project",
+        "${__dirname}",
+        "${__dirname}/src/server.py"
+      ],
+      "env": {
+        "MIMO_API_KEY": "${user_config.mimo_api_key}",
+        "MIMO_BASE_URL": "${user_config.mimo_base_url}",
+        "MIMO_MODEL": "${user_config.mimo_model}",
+        "NO_PROXY": "*"
+      }
+    }
+  },
+  "tools": [
+    {
+      "name": "mimo_image_analyze",
+      "description": "Analyze an image using Xiaomi MiMo Vision. Supports local image file paths and http(s) URLs."
+    }
+  ],
+  "user_config": {
+    "mimo_api_key": {
+      "type": "string",
+      "title": "MiMo API Key",
+      "description": "Your Xiaomi MiMo API key. It is injected at runtime as MIMO_API_KEY.",
+      "sensitive": true,
+      "required": true
+    },
+    "mimo_base_url": {
+      "type": "string",
+      "title": "MiMo Base URL",
+      "description": "MiMo OpenAI-compatible API base URL.",
+      "default": "https://api.xiaomimimo.com/v1",
+      "required": false
+    },
+    "mimo_model": {
+      "type": "string",
+      "title": "MiMo Model",
+      "description": "MiMo vision model identifier.",
+      "default": "mimo-v2.5",
+      "required": false
+    }
+  },
+  "compatibility": {
+    "platforms": [
+      "darwin",
+      "win32",
+      "linux"
+    ]
+  }
+}

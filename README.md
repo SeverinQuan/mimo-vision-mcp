@@ -135,6 +135,29 @@ The `mimo_image_analyze` tool should now be available.
 
 ---
 
+## 📦 One-click Bundle Install
+
+This repository also includes an MCPB/DXT-friendly bundle manifest.
+
+The MiMo API key is **not** stored in code or in the bundle. It is declared in
+`manifest.json` as a sensitive `user_config` field and injected at runtime as
+`MIMO_API_KEY`.
+
+Build the bundle with the current official MCPB CLI:
+
+```bash
+npm install -g @anthropic-ai/mcpb
+mcpb validate manifest.json
+mcpb pack
+```
+
+This creates an installable `.mcpb` bundle for desktop clients that support MCP
+Bundles. Older DXT-only clients may require the legacy `@anthropic-ai/dxt`
+toolchain, but the packaging model is the same: a zip archive with
+`manifest.json` and the MCP server files.
+
+---
+
 ## ⚙️ Environment Variables
 
 | Variable | Default | Description |
@@ -204,8 +227,13 @@ mimo-vision-mcp/
 ├── LICENSE              (MIT)
 ├── .gitignore
 ├── .env.example
+├── .mcpbignore          (MCPB/DXT packaging ignore rules)
+├── manifest.json        (MCPB/DXT bundle manifest)
+├── pyproject.toml       (uv bundle dependencies)
 ├── requirements.txt
-└── server.py            (main MCP server)
+├── server.py            (legacy direct MCP server entry)
+└── src/
+    └── server.py        (MCPB/DXT bundle entry)
 ```
 
 ---
@@ -388,6 +416,28 @@ cp .env.example .env
 
 ---
 
+## 📦 一键安装包
+
+本仓库也包含 MCPB/DXT 友好的安装包配置。
+
+MiMo API Key **不会**写入代码或打包产物。它在 `manifest.json` 中声明为
+敏感的 `user_config` 配置项，安装时由客户端收集，并在运行时注入为
+`MIMO_API_KEY` 环境变量。
+
+使用当前官方 MCPB CLI 构建：
+
+```bash
+npm install -g @anthropic-ai/mcpb
+mcpb validate manifest.json
+mcpb pack
+```
+
+这会生成可安装的 `.mcpb` 包，用于支持 MCP Bundles 的桌面客户端。旧版
+DXT-only 客户端可能需要使用旧的 `@anthropic-ai/dxt` 工具链，但核心格式
+仍然是包含 `manifest.json` 和 MCP server 文件的压缩包。
+
+---
+
 ## ⚙️ 环境变量
 
 | 变量 | 默认值 | 说明 |
@@ -457,8 +507,13 @@ mimo-vision-mcp/
 ├── LICENSE              (MIT)
 ├── .gitignore
 ├── .env.example
+├── .mcpbignore          (MCPB/DXT 打包忽略规则)
+├── manifest.json        (MCPB/DXT 安装包 manifest)
+├── pyproject.toml       (uv 打包依赖)
 ├── requirements.txt
-└── server.py            (MCP 主服务)
+├── server.py            (兼容旧配置的 MCP 入口)
+└── src/
+    └── server.py        (MCPB/DXT 安装包入口)
 ```
 
 ---

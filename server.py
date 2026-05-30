@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """
 MiMo Vision MCP Server
 ========================
@@ -34,7 +34,7 @@ _http = httpx.AsyncClient(
 )
 
 client = AsyncOpenAI(
-    api_key=***
+    api_key=MIMO_KEY,
     base_url=MIMO_BASE,
     http_client=_http,
     default_headers={"api-key": MIMO_KEY},   # MiMo uses api-key header (not Authorization: Bearer)
@@ -99,17 +99,20 @@ async def call_tool(name: str, arguments: dict) -> list[TextContent]:
     except FileNotFoundError as e:
         return [TextContent(type="text", text=f"Error: {e}")]
 
-    response = await client.chat.completions.create(
-        model=MIMO_MODEL,
-        messages=[{
-            "role": "user",
-            "content": [
-                {"type": "image_url", "image_url": {"url": image_uri}},
-                {"type": "text", "text": prompt},
-            ],
-        }],
-        max_completion_tokens=2048,
-    )
+    try:
+        response = await client.chat.completions.create(
+            model=MIMO_MODEL,
+            messages=[{
+                "role": "user",
+                "content": [
+                    {"type": "image_url", "image_url": {"url": image_uri}},
+                    {"type": "text", "text": prompt},
+                ],
+            }],
+            max_completion_tokens=2048,
+        )
+    except Exception as e:
+        return [TextContent(type="text", text=f"MiMo API error: {e}")]
 
     result = response.choices[0].message.content or "(empty response)"
     return [TextContent(type="text", text=result)]
