@@ -89,29 +89,44 @@ Text-only LLM + MiMo Vision MCP = Visual Agent
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Manual MCP Install
 
-### 1. Clone
+Use this path when your MCP client still expects a manual `mcpServers` JSON
+configuration.
+
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/SeverinQuan/mimo-vision-mcp.git
 cd mimo-vision-mcp
 ```
 
-### 2. Install dependencies
+### 2. Install Python dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. Set your API key
+### 3. Get and set your MiMo API key
+
+Get a MiMo API key from the Xiaomi MiMo platform, then either export it in your
+shell:
+
+```bash
+export MIMO_API_KEY="your_mimo_api_key_here"
+export MIMO_MODEL="mimo-v2.5"
+export MIMO_BASE_URL="https://api.xiaomimimo.com/v1"
+```
+
+Or keep it in your MCP client configuration as shown below. `.env` is provided
+only as a local note template; the server reads environment variables.
 
 ```bash
 cp .env.example .env
-# Edit .env — replace with your real MiMo API key
+# Optional local note only. Do not commit .env.
 ```
 
-### 4. Configure your MCP client
+### 4. Configure your MCP client manually
 
 Add to your MCP client configuration (Claude Desktop / Cline / Cursor / OpenClaw / OpenCode):
 
@@ -129,32 +144,67 @@ Add to your MCP client configuration (Claude Desktop / Cline / Cursor / OpenClaw
 }
 ```
 
-### 5. Restart your client
+### 5. Restart the client
 
 The `mimo_image_analyze` tool should now be available.
 
 ---
 
-## 📦 One-click Bundle Install
+## 📦 MCPB / DXT Install
 
-This repository also includes an MCPB/DXT-friendly bundle manifest.
+This repository can publish both installable bundle formats:
+
+| Format | File | Best for |
+|--------|------|----------|
+| MCPB | `dist/mimo-vision-mcp-1.0.0.mcpb` | Current MCP Bundle clients and newer Claude Desktop builds |
+| DXT | `dist/mimo-vision-mcp-1.0.0.dxt` | Legacy Desktop Extension clients |
 
 The MiMo API key is **not** stored in code or in the bundle. It is declared in
 `manifest.json` as a sensitive `user_config` field and injected at runtime as
 `MIMO_API_KEY`.
 
-Build the bundle with the current official MCPB CLI:
+### Option A: Install a prebuilt package
+
+1. Download the `.mcpb` or `.dxt` file from the release assets.
+2. Open your desktop MCP client.
+3. Go to the extensions or MCP bundle page.
+4. Import or double-click the downloaded package.
+5. Fill in the prompted fields:
+
+```text
+MiMo API Key: your_mimo_api_key_here
+MiMo Base URL: https://api.xiaomimimo.com/v1
+MiMo Model: mimo-v2.5
+```
+
+6. Enable the extension and restart the client if required.
+7. Confirm that the `mimo_image_analyze` tool is listed.
+
+### Option B: Build the current MCPB package
+
+Use this for current MCPB-compatible clients:
 
 ```bash
 npm install -g @anthropic-ai/mcpb
 mcpb validate manifest.json
-mcpb pack
+mcpb pack . dist/mimo-vision-mcp-1.0.0.mcpb
 ```
 
-This creates an installable `.mcpb` bundle for desktop clients that support MCP
-Bundles. Older DXT-only clients may require the legacy `@anthropic-ai/dxt`
-toolchain, but the packaging model is the same: a zip archive with
-`manifest.json` and the MCP server files.
+### Option C: Build the legacy DXT package
+
+Use this for older DXT-only clients:
+
+```bash
+npm install -g @anthropic-ai/dxt
+python3 -m pip install -r legacy-dxt/requirements.txt -t legacy-dxt/server/lib
+dxt validate legacy-dxt/manifest.json
+dxt pack legacy-dxt dist/mimo-vision-mcp-1.0.0.dxt
+```
+
+The DXT package bundles Python dependencies under `legacy-dxt/server/lib`, so it
+is larger than the MCPB package.
+
+### Option D: Build both formats
 
 To publish both formats from the same repository, run:
 
@@ -166,6 +216,9 @@ It writes both artifacts to `dist/`:
 
 - `mimo-vision-mcp-1.0.0.mcpb` for the current MCPB toolchain
 - `mimo-vision-mcp-1.0.0.dxt` for legacy DXT clients
+
+Both packages are unsigned by default. Sign them before public distribution if
+your target client or release process requires signed bundles.
 
 ---
 
@@ -381,7 +434,9 @@ Created by [SeverinQuan](https://github.com/SeverinQuan)
 
 ---
 
-## 🚀 快速开始
+## 🚀 手动 MCP 安装
+
+如果你的 MCP 客户端仍然使用手写 `mcpServers` JSON 配置，使用这一种方式。
 
 ### 1. 克隆仓库
 
@@ -390,20 +445,31 @@ git clone https://github.com/SeverinQuan/mimo-vision-mcp.git
 cd mimo-vision-mcp
 ```
 
-### 2. 安装依赖
+### 2. 安装 Python 依赖
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. 配置 API Key
+### 3. 获取并配置 MiMo API Key
+
+先从 Xiaomi MiMo 平台获取 API Key，然后可以在 shell 里导出环境变量：
+
+```bash
+export MIMO_API_KEY="your_mimo_api_key_here"
+export MIMO_MODEL="mimo-v2.5"
+export MIMO_BASE_URL="https://api.xiaomimimo.com/v1"
+```
+
+也可以直接写在 MCP 客户端配置里，见下一步。`.env` 只作为本地记录模板；
+服务本身读取的是环境变量。
 
 ```bash
 cp .env.example .env
-# 编辑 .env，替换为你的真实 MiMo API Key
+# 可选本地记录。不要提交 .env。
 ```
 
-### 4. 配置 MCP 客户端
+### 4. 手动配置 MCP 客户端
 
 在 MCP 客户端配置中（Claude Desktop / Cline / Cursor / OpenClaw / OpenCode）添加：
 
@@ -427,25 +493,61 @@ cp .env.example .env
 
 ---
 
-## 📦 一键安装包
+## 📦 MCPB / DXT 安装
 
-本仓库也包含 MCPB/DXT 友好的安装包配置。
+本仓库可以发布两种可安装包格式：
+
+| 格式 | 文件 | 适用场景 |
+|------|------|----------|
+| MCPB | `dist/mimo-vision-mcp-1.0.0.mcpb` | 当前 MCP Bundle 客户端和新版 Claude Desktop |
+| DXT | `dist/mimo-vision-mcp-1.0.0.dxt` | 旧版 Desktop Extension 客户端 |
 
 MiMo API Key **不会**写入代码或打包产物。它在 `manifest.json` 中声明为
 敏感的 `user_config` 配置项，安装时由客户端收集，并在运行时注入为
 `MIMO_API_KEY` 环境变量。
 
-使用当前官方 MCPB CLI 构建：
+### 方式 A：安装预构建包
+
+1. 从 release assets 下载 `.mcpb` 或 `.dxt` 文件。
+2. 打开你的桌面 MCP 客户端。
+3. 进入 extensions / MCP bundle 页面。
+4. 导入或双击下载的安装包。
+5. 按提示填写配置：
+
+```text
+MiMo API Key: your_mimo_api_key_here
+MiMo Base URL: https://api.xiaomimimo.com/v1
+MiMo Model: mimo-v2.5
+```
+
+6. 启用扩展；如客户端要求，重启一次。
+7. 确认工具列表中出现 `mimo_image_analyze`。
+
+### 方式 B：构建新版 MCPB 包
+
+适用于支持 MCPB 的当前客户端：
 
 ```bash
 npm install -g @anthropic-ai/mcpb
 mcpb validate manifest.json
-mcpb pack
+mcpb pack . dist/mimo-vision-mcp-1.0.0.mcpb
 ```
 
-这会生成可安装的 `.mcpb` 包，用于支持 MCP Bundles 的桌面客户端。旧版
-DXT-only 客户端可能需要使用旧的 `@anthropic-ai/dxt` 工具链，但核心格式
-仍然是包含 `manifest.json` 和 MCP server 文件的压缩包。
+### 方式 C：构建旧版 DXT 包
+
+适用于只支持旧 DXT 的客户端：
+
+```bash
+npm install -g @anthropic-ai/dxt
+python3 -m pip install -r legacy-dxt/requirements.txt -t legacy-dxt/server/lib
+dxt validate legacy-dxt/manifest.json
+dxt pack legacy-dxt dist/mimo-vision-mcp-1.0.0.dxt
+```
+
+DXT 包会把 Python 依赖放进 `legacy-dxt/server/lib`，因此体积会比 MCPB
+包更大。
+
+### 方式 D：同时构建两种格式
 
 如需从同一仓库同时发布两种格式，运行：
 
@@ -457,6 +559,9 @@ bash scripts/build_bundles.sh
 
 - `mimo-vision-mcp-1.0.0.mcpb`：当前 MCPB 工具链
 - `mimo-vision-mcp-1.0.0.dxt`：旧 DXT 客户端兼容包
+
+两个安装包默认未签名。如果目标客户端或发布流程要求签名，请在公开分发前
+补充签名步骤。
 
 ---
 
