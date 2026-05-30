@@ -52,7 +52,7 @@
     "mimo_api_key": {
       "type": "string",
       "title": "MiMo API Key",
-      "description": "Your Xiaomi MiMo API key. It is injected at runtime as MIMO_API_KEY.",
+      "description": "Paste only the raw key value, for example sk-xxxx. Do not include MIMO_API_KEY=, quotes, or spaces.",
       "sensitive": true,
       "required": true
     }

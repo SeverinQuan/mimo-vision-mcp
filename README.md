@@ -176,6 +176,9 @@ model to avoid client-side `user_config` interpolation issues.
 MiMo API Key: your_mimo_api_key_here
 ```
 
+Only paste the raw key value, such as `sk-xxxx`. Do not include
+`MIMO_API_KEY=`, quotes, or leading/trailing spaces.
+
 6. Enable the extension and restart the client if required.
 7. Confirm that the `mimo_image_analyze` tool is listed.
 
@@ -517,6 +520,9 @@ MiMo API Key **不会**写入代码或打包产物。它在 `manifest.json` 中�
 ```text
 MiMo API Key: your_mimo_api_key_here
 ```
+
+只填写原始 Key 值，例如 `sk-xxxx`。不要带 `MIMO_API_KEY=`，不要加引号，
+前后也不要有空格。
 
 6. 启用扩展；如客户端要求，重启一次。
 7. 确认工具列表中出现 `mimo_image_analyze`。

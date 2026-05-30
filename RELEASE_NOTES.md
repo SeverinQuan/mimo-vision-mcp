@@ -26,6 +26,9 @@ During installation, fill in:
 MiMo API Key: your_mimo_api_key_here
 ```
 
+Paste only the raw key value, such as `sk-xxxx`; do not include
+`MIMO_API_KEY=`, quotes, or spaces.
+
 ## Notes
 
 The packages are not signed. If your target client requires signed bundles, sign the release assets before redistribution.
